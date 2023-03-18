@@ -3,14 +3,14 @@ import java.util.*;
 public class Subject {
 	private String name;
 	private String ID;
-	private int fullMark;
+	private String fullMark;
 	private ArrayList<Student> students;
   
   public Subject(){
     
   }
 	
-	public Subject(String name, String id, int fullMark, ArrayList<Student> students) {
+	public Subject(String name, String id, String fullMark, ArrayList<Student> students) {
 		this.name = name;
 		this.ID = id;
 		this.fullMark = fullMark;
@@ -25,7 +25,7 @@ public class Subject {
 		return ID;
 	}
   
-	public int getFullMark() {
+	public String getFullMark() {
 		return fullMark;
 	}
   
