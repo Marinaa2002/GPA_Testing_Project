@@ -8,14 +8,14 @@ import java.util.ArrayList;
 public class SubjectBuilder {
     private String name ;
     private String id ;
-    private String fullMark ;
+    private int fullMark ;
     ArrayList<Student> students ;
     //constructor to intialize the ArrayList 
     public SubjectBuilder() {
         students = new ArrayList<>();
     }
     //setters for Subject object attributes ;
-    public void setFullMark(String fullMark) {
+    public void setFullMark(int fullMark) {
         this.fullMark = fullMark;
     }
 
