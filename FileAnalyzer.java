@@ -1,28 +1,25 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FileAnalyzer {
-    ArrayList<String> words=new ArrayList<>();
-    Subject subject;
-    SubjectBuilder subjectBuilder;
-    Student student;
-    StudentBuilder studentBuilder;
+    private static ArrayList<String> words=new ArrayList<>();
+    private static Subject subject;
+    private static SubjectBuilder subjectBuilder;
+    private Student student;
+    private static StudentBuilder studentBuilder;
 
-    public Subject analyze() {
-        String myfile, myline;
-        Scanner scan = new Scanner(System.in);
-
-        System.out.print("Enter File Name: ");
-        myfile = scan.nextLine();
+    public static Subject ReadFile(File myfile)throws IllegalArgumentException {
 
         try {
             FileReader fileReader = new FileReader(myfile);
             BufferedReader bufread = new BufferedReader(fileReader);
 
             // reading the file, line by line
+            String myline;
             while ((myline = bufread.readLine()) != null)
                 words.add(myline);
             bufread.close();
@@ -30,16 +27,11 @@ public class FileAnalyzer {
             System.out.println("Exception: " + e);
         }
         //To validate Validate
-        try {
-            validate(words);
-        }
-        catch (IllegalArgumentException ex){
-            System.out.println(ex.getMessage());
-        }
+        validate(words);
         return subject;
     }
 
-    public void validate(ArrayList<String> lines) throws IllegalArgumentException {
+    private static void validate(ArrayList<String> lines) throws IllegalArgumentException {
         ValidateFirstLine(lines.get(0));
         for (int i = 1; i < lines.size(); i++) {
             ValidateStudents(lines.get(i),i);
@@ -94,7 +86,7 @@ public class FileAnalyzer {
     }
 
 
-    public void ValidateFirstLine(String s) {
+    private static void ValidateFirstLine(String s) {
         int count = 0;
         for (int i = 0; i < s.length(); i++) {
             if (s.charAt(i) == ',') {
@@ -171,7 +163,7 @@ public class FileAnalyzer {
         subjectBuilder.setFullMark(Integer.parseInt(EachStringInLine));
     }
 
-    public void ValidateStudents(String s,int k) {
+    private static void ValidateStudents(String s,int k) {
         int count = 0;
         for (int i = 0; i < s.length(); i++) {
             if (s.charAt(i) == ',') {
@@ -266,8 +258,8 @@ public class FileAnalyzer {
 
 
     public static void main(String[] args) {
-        FileAnalyzer fileAnalyzer=new FileAnalyzer();
-        Subject s=new Subject();
-        s=fileAnalyzer.analyze();
+
+        File file =new File("D:\\3rd computer\\2nd Term\\Testing\\Projects\\MyProject_v1\\src\\record.txt");
+        Subject S=FileAnalyzer.ReadFile(file);
     }
 }
