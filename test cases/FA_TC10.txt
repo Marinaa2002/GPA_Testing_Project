@@ -1,0 +1,4 @@
+computer controlled systems,CSE431,0
+mina mounir farid gendi,1901384s,7,9,19,55
+
+//invalid full mark , should be 100 
