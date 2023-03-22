@@ -1,0 +1,6 @@
+computer controlled systems,CSE431,100
+mina mounir farid gendi,19013848,10,10,20,60
+monica adel ghaly,190138SS,10,10,20,50
+
+
+//more than 1 character in student id
