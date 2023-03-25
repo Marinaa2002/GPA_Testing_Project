@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
  */
-package com.mycompany.testingproject;
+
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -35,16 +35,13 @@ public class FileAnalyzerTest11 {
         File myfile = new File("test cases/Fa_TC11.txt");
         try {
             Subject result = FileAnalyzer.ReadFile(myfile);
-        } catch (IllegalArgumentException e) {
-            String massage = "student id should be unique";
-            if (e.getMessage().equals(massage)) {
+        } catch (StudentNumberException e) {
+            
                 System.out.println("passed.");
                 return;
-            }
-            fail("wrong massage:" + e.getMessage() + ",supposed: " + massage);
-
+            
         }
-        fail("program did not throw illegalArgumentException");
+        fail("program did not throw StudentNumberException");
 
     }
 

@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
  */
-package com.mycompany.testingproject;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -23,7 +22,6 @@ public class FileAnalyzerTest07 {
     public FileAnalyzerTest07() {
     }
 
-    
     @Test
     public void testReadFile7() throws FileNotFoundException {
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -36,18 +34,14 @@ public class FileAnalyzerTest07 {
         File myfile = new File("test cases/Fa_TC07.txt");
         try {
             Subject result = FileAnalyzer.ReadFile(myfile);
-        } catch (IllegalArgumentException e) {
-            String massage = "subject full mark should be 100";
-            if (e.getMessage().equals(massage)) {
-                System.out.println("passed.");
-                return;
-            }
-            fail("wrong massage:" + e.getMessage() + ",supposed: " + massage);
+        } catch (FullMarkException e) {
+
+            System.out.println("passed.");
+            return;
 
         }
-        fail("program did not throw illegalArgumentException");
+        fail("program did not throw FullMarkException");
 
     }
-
 
 }
