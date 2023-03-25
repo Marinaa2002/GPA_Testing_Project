@@ -1,0 +1,8 @@
+public class StudentMarkException extends RuntimeException
+{
+    SubjectNameException(String msg)
+    {
+        super(msg) ;
+    }
+    
+}
