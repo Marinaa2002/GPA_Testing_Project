@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class FileAnalyzer {
@@ -15,7 +16,7 @@ public class FileAnalyzer {
     public static Subject ReadFile(File myfile)throws IllegalArgumentException , RuntimeException{
 
         try {
-          /*  String fileString=myfile.getName();
+            String fileString=myfile.getName();
             int counterExtension=0;
             String extension="";
             for (int i=fileString.length()-3;i<fileString.length();i++){
@@ -27,7 +28,7 @@ public class FileAnalyzer {
             }
             if(!extension.equals("txt")){
                 throw new IllegalArgumentException("Invalid File extension ");
-            }*/
+            }
             FileReader fileReader = new FileReader(myfile);
             BufferedReader bufread = new BufferedReader(fileReader);
 
@@ -41,6 +42,19 @@ public class FileAnalyzer {
         }
         //To validate Validate
         validate(words);
+        ArrayList<Student>students=new ArrayList<>();
+        Iterator it=subject.getStudents_copy();
+        while(it.hasNext()) {
+            students.add((Student) it.next());
+        }
+        for (int i=0;i<students.size();i++){
+            for (int j=i+1;j<students.size();j++){
+                if(students.get(i).getID().equals(students.get(j).getID())){
+                    throw new StudentNumberException("Student Id duplicate between -> x"+students.get(i).getName()+ " -> "+ students.get(j).getName());
+                }
+            }
+        }
+        System.out.println("\nSuccessful input operation\n");
 
         return subject;
     }
@@ -58,20 +72,24 @@ public class FileAnalyzer {
         char currentCharacter;
         boolean upperCasePresent = false;
         boolean lowerCasePresent = false;
+        boolean numberPresent = true;
         boolean specialCharacterPresent = true;
 
         for (int i = 0; i < input.length(); i++) {
             currentCharacter = input.charAt(i);
             if (Character.isUpperCase(currentCharacter)) {
                 upperCasePresent = true;
-            } else if (Character.isLowerCase(currentCharacter)) {
+            }
+            else if (Character.isDigit(currentCharacter)) {
+                numberPresent = false;
+            }else if (Character.isLowerCase(currentCharacter)) {
                 lowerCasePresent = true;
             } else if (specialChars.contains(String.valueOf(currentCharacter))) {
                 specialCharacterPresent = false;
             }
         }
 
-        return (upperCasePresent || lowerCasePresent) && specialCharacterPresent;
+        return numberPresent&&(upperCasePresent || lowerCasePresent) && specialCharacterPresent;
     }
 
     private static boolean checkStringAlphaNumeric(String input) {
@@ -110,6 +128,9 @@ public class FileAnalyzer {
         if (count != 2) {
             throw new IllegalArgumentException("Invalid File:Line 1 error");
         }
+        if(count==s.length()){
+            throw new IllegalArgumentException("Empty record is not allowed");
+        }
         String EachStringInLine = "";
         int start = 0;
         for (int i = 0; i < 3; i++) {
@@ -124,6 +145,7 @@ public class FileAnalyzer {
             }
             //if not contain (,)
             if (EachStringInLine.charAt(0) != ' ') {
+                EachStringInLine=EachStringInLine.trim();
                 if (i == 0) {
                     if (checkStringAlphabetic(EachStringInLine)) {
                         subjectBuilder = new SubjectBuilder();
@@ -162,10 +184,11 @@ public class FileAnalyzer {
                 }
             }
             else {
-                throw new SubjectCodeException("Can't contain space in the first");
+                throw new SpaceException("Can't contain space in the first");
             }
         }
         String FullMark = "100";
+        EachStringInLine=EachStringInLine.trim();
         if(FullMark.length()!=EachStringInLine.length()){
             throw new FullMarkException("Full mark must be 100");
         }
@@ -187,6 +210,9 @@ public class FileAnalyzer {
         if (count < 5 || count > 5) {
             throw new IllegalArgumentException("Invalid Line of students : line "+(k+1));
         }
+        if(count==s.length()){
+            throw new IllegalArgumentException("Empty record is not allowed");
+        }
         String EachStringInLine = "";
         int start = 0;
         for (int i = 0; i < 6; i++) {
@@ -200,6 +226,7 @@ public class FileAnalyzer {
                 }
             }
             if (EachStringInLine.charAt(0) != ' ') {
+                EachStringInLine=EachStringInLine.trim();
                 if (i == 0) {
                     if (checkStringAlphabetic(EachStringInLine)) {
                         studentBuilder=new StudentBuilder();
@@ -219,7 +246,6 @@ public class FileAnalyzer {
                     }
                     else {
                         throw new StudentNumberException("Student code:Must be exact 8 Line: "+(k+1));
-
                     }
                 }
                 else if(i==2||i==3) {
@@ -243,21 +269,19 @@ public class FileAnalyzer {
                     for (int a = 0; a < EachStringInLine.length(); a++) {
                         if (!Character.isDigit(EachStringInLine.charAt(a))) {
                             throw new StudentMarkException("Midterm must be Integer Line :"+(k+1));
-
                         }
                     }
                     if (Integer.parseInt(EachStringInLine) > 20 || Integer.parseInt(EachStringInLine) < 0) {
                         throw new StudentMarkException("Midterm must be in range (0-20) Line :"+(k+1));
-
                     }
                     studentBuilder.setMidterm(Integer.parseInt(EachStringInLine));
                 }
             }
             else{
                 throw new IllegalArgumentException("Can't contain space in the first Line : "+(k+1));
-
             }
         }
+        EachStringInLine=EachStringInLine.trim();
         for (int a = 0; a < EachStringInLine.length(); a++) {
             if (!Character.isDigit(EachStringInLine.charAt(a))) {
                 throw new StudentMarkException("Final Exam: must be integer Line: "+(k+1));
@@ -269,11 +293,8 @@ public class FileAnalyzer {
         studentBuilder.setFinalExam(Integer.parseInt(EachStringInLine));
         subjectBuilder.addStudent(studentBuilder.build());
     }
-
-
     public static void main(String[] args) {
-
-        File file =new File("D:\\3rd computer\\2nd Term\\Testing\\Projects\\MyProject_v1\\src\\record.json");
+        File file =new File("D:\\3rd computer\\2nd Term\\Testing\\Projects\\MyProject_v1\\src\\record.txt");
         Subject S=FileAnalyzer.ReadFile(file);
     }
 }
