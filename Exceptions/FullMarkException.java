@@ -1,6 +1,6 @@
 public class FullMarkException extends RuntimeException
 {
-    SubjectNameException(String msg)
+    FullMarkException(String msg)
     {
         super(msg) ;
     }

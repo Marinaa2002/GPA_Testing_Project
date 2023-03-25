@@ -1,6 +1,6 @@
 public class StudentNameException extends RuntimeException
 {
-    SubjectNameException(String msg)
+    StudentNameException(String msg)
     {
         super(msg) ;
     }

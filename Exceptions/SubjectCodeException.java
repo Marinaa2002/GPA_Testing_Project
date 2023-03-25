@@ -1,6 +1,6 @@
 public class SubjectCodeException extends RuntimeException
 {
-    SubjectNameException(String msg)
+     SubjectCodeException(String msg)
     {
         super(msg) ;
     }

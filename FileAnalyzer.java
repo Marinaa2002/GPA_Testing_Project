@@ -12,9 +12,22 @@ public class FileAnalyzer {
     private Student student;
     private static StudentBuilder studentBuilder;
 
-    public static Subject ReadFile(File myfile)throws IllegalArgumentException {
+    public static Subject ReadFile(File myfile)throws IllegalArgumentException , RuntimeException{
 
         try {
+          /*  String fileString=myfile.getName();
+            int counterExtension=0;
+            String extension="";
+            for (int i=fileString.length()-3;i<fileString.length();i++){
+                extension +=fileString.charAt(i);
+                counterExtension++;
+                if(counterExtension==3){
+                    break;
+                }
+            }
+            if(!extension.equals("txt")){
+                throw new IllegalArgumentException("Invalid File extension ");
+            }*/
             FileReader fileReader = new FileReader(myfile);
             BufferedReader bufread = new BufferedReader(fileReader);
 
@@ -28,6 +41,7 @@ public class FileAnalyzer {
         }
         //To validate Validate
         validate(words);
+
         return subject;
     }
 
@@ -86,7 +100,7 @@ public class FileAnalyzer {
     }
 
 
-    private static void ValidateFirstLine(String s) {
+    private static void ValidateFirstLine(String s)throws RuntimeException{
         int count = 0;
         for (int i = 0; i < s.length(); i++) {
             if (s.charAt(i) == ',') {
@@ -115,49 +129,49 @@ public class FileAnalyzer {
                         subjectBuilder = new SubjectBuilder();
                         subjectBuilder.setName(EachStringInLine);
                     } else {
-                        throw new IllegalArgumentException("Name of subject must contain Alphabetic only ");
+                        throw new SubjectNameException("Name of subject must contain Alphabetic only ");
                     }
                 } else if (i == 1) {
                     if (EachStringInLine.length() == 6 || EachStringInLine.length() == 7) {
                         if (EachStringInLine.length() == 7) {
                             if (EachStringInLine.charAt(6) != 's') {
-                                throw new IllegalArgumentException("Last digit mush contain only (s) (if exist)");
+                                throw new SubjectCodeException("Last digit mush contain only (s) (if exist)");
                             }
                         }
                         if (checkStringAlphaNumeric(EachStringInLine)) {
                             for (int a = 0; a < EachStringInLine.length(); a++) {
                                 if (Character.isDigit(EachStringInLine.charAt(a))) {
                                     if (a == 0 || a == 1 || a == 2) {
-                                        throw new IllegalArgumentException("Subject-code: It must be 6-7 Alphanumeric characters. The first 3 are Alphabetic\n" +
+                                        throw new SubjectCodeException("Subject-code: It must be 6-7 Alphanumeric characters. The first 3 are Alphabetic\n" +
                                                 "followed by 3 numeric characters. The sevens should be s if exists.");
                                     }
                                 } else {
                                     if (a == 3 || a == 4 || a == 5) {
-                                        throw new IllegalArgumentException("throw new IllegalArgumentException(Subject-code: It must be 6-7 Alphanumeric characters. The first 3 are Alphabetic\n" + "followed by 3 numeric characters. The sevens should be s if exists.");
+                                        throw new SubjectCodeException("throw new IllegalArgumentException(Subject-code: It must be 6-7 Alphanumeric characters. The first 3 are Alphabetic\n" + "followed by 3 numeric characters. The sevens should be s if exists.");
                                     }
                                 }
                             }
                             subjectBuilder.setId(EachStringInLine);
                         } else {
-                            throw new IllegalArgumentException("Subject Code: must contain alphanumeric only");
+                            throw new SubjectCodeException("Subject Code: must contain alphanumeric only");
                         }
                     } else {
-                        throw new IllegalArgumentException("Subject code: must be 6 or 7 Alphanumeric and the last digit may be (s) ");
+                        throw new SubjectCodeException("Subject code: must be 6 or 7 Alphanumeric and the last digit may be (s) ");
 
                     }
                 }
             }
             else {
-                throw new IllegalArgumentException("Can't contain space in the first");
+                throw new SubjectCodeException("Can't contain space in the first");
             }
         }
         String FullMark = "100";
         if(FullMark.length()!=EachStringInLine.length()){
-            throw new IllegalArgumentException("Full mark must be 100");
+            throw new FullMarkException("Full mark must be 100");
         }
         for (int i = 0; i < EachStringInLine.length(); i++) {
             if (FullMark.charAt(i) != EachStringInLine.charAt(i)) {
-                throw new IllegalArgumentException("Full mark must be 100");
+                throw new FullMarkException("Full mark must be 100");
             }
         }
         subjectBuilder.setFullMark(Integer.parseInt(EachStringInLine));
@@ -192,30 +206,30 @@ public class FileAnalyzer {
                         studentBuilder.setName(EachStringInLine);
                     }
                     else{
-                        throw new IllegalArgumentException("Name of Student must contain Alphabetic only at line :"+(k+1));
+                        throw new StudentNameException("Name of Student must contain Alphabetic only at line :"+(k+1));
                     }
                 } else if (i == 1) {
                     if (EachStringInLine.length() == 8) {
                         for (int a = 0; a < EachStringInLine.length(); a++) {
                             if (!Character.isDigit(EachStringInLine.charAt(a))&&a!=7) {
-                                throw new IllegalArgumentException("Student code :must contain numbers only Line: "+(k+1));
+                                throw new StudentNumberException("Student code :must contain numbers only Line: "+(k+1));
                             }
                         }
                         studentBuilder.setId(EachStringInLine);
                     }
                     else {
-                        throw new IllegalArgumentException("Student code:Must be exact 8 Line: "+(k+1));
+                        throw new StudentNumberException("Student code:Must be exact 8 Line: "+(k+1));
 
                     }
                 }
                 else if(i==2||i==3) {
                     for (int a = 0; a < EachStringInLine.length(); a++) {
                         if (!Character.isDigit(EachStringInLine.charAt(a))) {
-                            throw new IllegalArgumentException("Activities or oral/Practical must be Integer :Line :"+(k+1));
+                            throw new StudentMarkException("Activities or oral/Practical must be Integer :Line :"+(k+1));
                         }
                     }
                     if (Integer.parseInt(EachStringInLine) > 10 || Integer.parseInt(EachStringInLine) < 0) {
-                        throw new IllegalArgumentException("Activities or oral/Practical must be in range (0-10) :Line:"+(k+1));
+                        throw new StudentMarkException("Activities or oral/Practical must be in range (0-10) :Line:"+(k+1));
                     }
                     // Check if int
                     if (i == 2) {
@@ -228,12 +242,12 @@ public class FileAnalyzer {
                 else if(i==4){
                     for (int a = 0; a < EachStringInLine.length(); a++) {
                         if (!Character.isDigit(EachStringInLine.charAt(a))) {
-                            throw new IllegalArgumentException("Midterm must be Integer Line :"+(k+1));
+                            throw new StudentMarkException("Midterm must be Integer Line :"+(k+1));
 
                         }
                     }
                     if (Integer.parseInt(EachStringInLine) > 20 || Integer.parseInt(EachStringInLine) < 0) {
-                        throw new IllegalArgumentException("Midterm must be in range (0-20) Line :"+(k+1));
+                        throw new StudentMarkException("Midterm must be in range (0-20) Line :"+(k+1));
 
                     }
                     studentBuilder.setMidterm(Integer.parseInt(EachStringInLine));
@@ -246,11 +260,11 @@ public class FileAnalyzer {
         }
         for (int a = 0; a < EachStringInLine.length(); a++) {
             if (!Character.isDigit(EachStringInLine.charAt(a))) {
-                throw new IllegalArgumentException("Final Exam: must be integer Line: "+(k+1));
+                throw new StudentMarkException("Final Exam: must be integer Line: "+(k+1));
             }
         }
         if (Integer.parseInt(EachStringInLine) > 60 || Integer.parseInt(EachStringInLine) < 0) {
-            throw new IllegalArgumentException("Midterm must be in range (0-60) Line :"+(k+1));
+            throw new StudentMarkException("Midterm must be in range (0-60) Line :"+(k+1));
         }
         studentBuilder.setFinalExam(Integer.parseInt(EachStringInLine));
         subjectBuilder.addStudent(studentBuilder.build());
@@ -259,7 +273,7 @@ public class FileAnalyzer {
 
     public static void main(String[] args) {
 
-        File file =new File("D:\\3rd computer\\2nd Term\\Testing\\Projects\\MyProject_v1\\src\\record.txt");
+        File file =new File("D:\\3rd computer\\2nd Term\\Testing\\Projects\\MyProject_v1\\src\\record.json");
         Subject S=FileAnalyzer.ReadFile(file);
     }
 }
