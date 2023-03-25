@@ -1,0 +1,8 @@
+public class SubjectCodeException extends RuntimeException
+{
+    SubjectNameException(String msg)
+    {
+        super(msg) ;
+    }
+    
+}
