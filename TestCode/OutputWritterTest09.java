@@ -15,7 +15,7 @@ class OutputWritterTest {
 		String expected = "Subject Name: Math Max Mark: 100 "
 				+ "Student name: MONA Student number: 1900150 GPA: 3.7 Grade: A- ";
 		ArrayList<Student> students = new ArrayList<>();
-		students.add(new Student("MONA", "1900150",6,10,17,58));
+		students.add(new Student("MONA", "1900150",6,8,17,58));
 		Subject s = new Subject("Math","12",100,students);
 		File file = new File("To.txt");
 		try {
