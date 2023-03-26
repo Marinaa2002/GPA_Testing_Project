@@ -13,7 +13,7 @@ class OutputWritterTest {
 	@Test
 	void test() {
 		String expected = "Subject Name: Math Max Mark: 100 "
-				+ "Student name: MONA Student number: 1900150 GPA: 4.0 Grade: A ";;
+				+ "Student name: MONA Student number: 1900150 GPA: 4.0 Grade: A ";
 		ArrayList<Student> students = new ArrayList<>();
 		students.add(new Student("MONA", "1900150",8,9,19,58));
 		Subject s = new Subject("Math","12",100,students);
