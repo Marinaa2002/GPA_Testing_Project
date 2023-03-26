@@ -32,10 +32,11 @@ public class FileAnalyzerTest02 {
         File myfile = new File("test cases/Fa_TC02.txt");
         try {
             Subject result = FileAnalyzer.ReadFile(myfile);
-        } catch (SubjectNameException e) {
+        } catch (SpaceException e) {
             System.out.println("passed.");
+            return;
         }
-        fail("program did not throw SubjectNameException ");
+        fail("program did not throw SpaceException ");
 
     }
 
