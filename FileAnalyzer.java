@@ -34,8 +34,10 @@ public class FileAnalyzer {
 
             // reading the file, line by line
             String myline;
-            while ((myline = bufread.readLine()) != null)
-                words.add(myline);
+            while ((myline = bufread.readLine()) != null) {
+                if (!myline.isEmpty())
+                    words.add(myline);
+            }
             bufread.close();
         } catch (IOException e) {
             System.out.println("Exception: " + e);
@@ -143,51 +145,66 @@ public class FileAnalyzer {
                     break;
                 }
             }
-            //if not contain (,)
-            if (EachStringInLine.charAt(0) != ' ') {
-                EachStringInLine=EachStringInLine.trim();
-                if (i == 0) {
-                    if (checkStringAlphabetic(EachStringInLine)) {
-                        subjectBuilder = new SubjectBuilder();
-                        subjectBuilder.setName(EachStringInLine);
-                    } else {
-                        throw new SubjectNameException("Name of subject must contain Alphabetic only ");
-                    }
-                } else if (i == 1) {
-                    if (EachStringInLine.length() == 6 || EachStringInLine.length() == 7) {
-                        if (EachStringInLine.length() == 7) {
-                            if (EachStringInLine.charAt(6) != 's') {
-                                throw new SubjectCodeException("Last digit mush contain only (s) (if exist)");
-                            }
+            if(!EachStringInLine.isEmpty()) {
+                //if not contain (,)
+                if (EachStringInLine.charAt(0) != ' ') {
+                    EachStringInLine = EachStringInLine.trim();
+                    if (i == 0) {
+                        if (checkStringAlphabetic(EachStringInLine)) {
+                            subjectBuilder = new SubjectBuilder();
+                            subjectBuilder.setName(EachStringInLine);
+                        } else {
+                            throw new SubjectNameException("Name of subject must contain Alphabetic only ");
                         }
-                        if (checkStringAlphaNumeric(EachStringInLine)) {
-                            for (int a = 0; a < EachStringInLine.length(); a++) {
-                                if (Character.isDigit(EachStringInLine.charAt(a))) {
-                                    if (a == 0 || a == 1 || a == 2) {
-                                        throw new SubjectCodeException("Subject-code: It must be 6-7 Alphanumeric characters. The first 3 are Alphabetic\n" +
-                                                "followed by 3 numeric characters. The sevens should be s if exists.");
-                                    }
-                                } else {
-                                    if (a == 3 || a == 4 || a == 5) {
-                                        throw new SubjectCodeException("throw new IllegalArgumentException(Subject-code: It must be 6-7 Alphanumeric characters. The first 3 are Alphabetic\n" + "followed by 3 numeric characters. The sevens should be s if exists.");
-                                    }
+                    } else if (i == 1) {
+                        if (EachStringInLine.length() == 6 || EachStringInLine.length() == 7) {
+                            if (EachStringInLine.length() == 7) {
+                                if (EachStringInLine.charAt(6) != 's') {
+                                    throw new SubjectCodeException("Last digit mush contain only (s) (if exist)");
                                 }
                             }
-                            subjectBuilder.setId(EachStringInLine);
+                            if (checkStringAlphaNumeric(EachStringInLine)) {
+                                for (int a = 0; a < EachStringInLine.length(); a++) {
+                                    if (Character.isDigit(EachStringInLine.charAt(a))) {
+                                        if (a == 0 || a == 1 || a == 2) {
+                                            throw new SubjectCodeException("Subject-code: It must be 6-7 Alphanumeric characters. The first 3 are Alphabetic\n" +
+                                                    "followed by 3 numeric characters. The sevens should be s if exists.");
+                                        }
+                                    } else {
+                                        if (a == 3 || a == 4 || a == 5) {
+                                            throw new SubjectCodeException("Subject-code: It must be 6-7 Alphanumeric characters. The first 3 are Alphabetic\n" + "followed by 3 numeric characters. The sevens should be s if exists.");
+                                        }
+                                    }
+                                }
+                                subjectBuilder.setId(EachStringInLine);
+                            } else {
+                                throw new SubjectCodeException("Subject Code: must contain alphanumeric only");
+                            }
                         } else {
-                            throw new SubjectCodeException("Subject Code: must contain alphanumeric only");
-                        }
-                    } else {
-                        throw new SubjectCodeException("Subject code: must be 6 or 7 Alphanumeric and the last digit may be (s) ");
+                            throw new SubjectCodeException("Subject code: must be 6 or 7 Alphanumeric and the last digit may be (s) ");
 
+                        }
                     }
+                } else {
+                    throw new SpaceException("Can't contain space in the first");
                 }
             }
-            else {
-                throw new SpaceException("Can't contain space in the first");
+            else
+            {
+                if(i==0){
+                    throw new SubjectNameException("Can't provide empty Subject Name");
+
+                }
+                if(i==1){
+                    throw new SubjectCodeException("Can't provide empty Subject Code");
+
+                }
             }
         }
-        String FullMark = "100";
+        if(EachStringInLine.isEmpty()){
+            throw new FullMarkException("Can't provide empty Subject Mark");
+        }
+            String FullMark = "100";
         EachStringInLine=EachStringInLine.trim();
         if(FullMark.length()!=EachStringInLine.length()){
             throw new FullMarkException("Full mark must be 100");
@@ -225,63 +242,74 @@ public class FileAnalyzer {
                     break;
                 }
             }
-            if (EachStringInLine.charAt(0) != ' ') {
-                EachStringInLine=EachStringInLine.trim();
-                if (i == 0) {
-                    if (checkStringAlphabetic(EachStringInLine)) {
-                        studentBuilder=new StudentBuilder();
-                        studentBuilder.setName(EachStringInLine);
-                    }
-                    else{
-                        throw new StudentNameException("Name of Student must contain Alphabetic only at line :"+(k+1));
-                    }
-                } else if (i == 1) {
-                    if (EachStringInLine.length() == 8) {
+            if(!EachStringInLine.isEmpty()) {
+                if (EachStringInLine.charAt(0) != ' ') {
+                    EachStringInLine = EachStringInLine.trim();
+                    if (i == 0) {
+                        if (checkStringAlphabetic(EachStringInLine)) {
+                            studentBuilder = new StudentBuilder();
+                            studentBuilder.setName(EachStringInLine);
+                        } else {
+                            throw new StudentNameException("Name of Student must contain Alphabetic only at line :" + (k + 1));
+                        }
+                    } else if (i == 1) {
+                        if (EachStringInLine.length() == 8) {
+                            for (int a = 0; a < EachStringInLine.length(); a++) {
+                                if (!Character.isDigit(EachStringInLine.charAt(a)) && a != 7) {
+                                    throw new StudentNumberException("Student code :must contain numbers only Line: " + (k + 1));
+                                }
+                            }
+                            studentBuilder.setId(EachStringInLine);
+                        } else {
+                            throw new StudentNumberException("Student code:Must be exact 8 Line: " + (k + 1));
+                        }
+                    } else if (i == 2 || i == 3) {
                         for (int a = 0; a < EachStringInLine.length(); a++) {
-                            if (!Character.isDigit(EachStringInLine.charAt(a))&&a!=7) {
-                                throw new StudentNumberException("Student code :must contain numbers only Line: "+(k+1));
+                            if (!Character.isDigit(EachStringInLine.charAt(a))) {
+                                throw new StudentMarkException("Activities or oral/Practical must be Integer :Line :" + (k + 1));
                             }
                         }
-                        studentBuilder.setId(EachStringInLine);
-                    }
-                    else {
-                        throw new StudentNumberException("Student code:Must be exact 8 Line: "+(k+1));
-                    }
-                }
-                else if(i==2||i==3) {
-                    for (int a = 0; a < EachStringInLine.length(); a++) {
-                        if (!Character.isDigit(EachStringInLine.charAt(a))) {
-                            throw new StudentMarkException("Activities or oral/Practical must be Integer :Line :"+(k+1));
+                        if (Integer.parseInt(EachStringInLine) > 10 || Integer.parseInt(EachStringInLine) < 0) {
+                            throw new StudentMarkException("Activities or oral/Practical must be in range (0-10) :Line:" + (k + 1));
                         }
-                    }
-                    if (Integer.parseInt(EachStringInLine) > 10 || Integer.parseInt(EachStringInLine) < 0) {
-                        throw new StudentMarkException("Activities or oral/Practical must be in range (0-10) :Line:"+(k+1));
-                    }
-                    // Check if int
-                    if (i == 2) {
-                        studentBuilder.setActivities(Integer.parseInt(EachStringInLine));
-                    }
-                    else if(i==3){
-                        studentBuilder.setOral(Integer.parseInt(EachStringInLine));
-                    }
-                }
-                else if(i==4){
-                    for (int a = 0; a < EachStringInLine.length(); a++) {
-                        if (!Character.isDigit(EachStringInLine.charAt(a))) {
-                            throw new StudentMarkException("Midterm must be Integer Line :"+(k+1));
+                        // Check if int
+                        if (i == 2) {
+                            studentBuilder.setActivities(Integer.parseInt(EachStringInLine));
+                        } else if (i == 3) {
+                            studentBuilder.setOral(Integer.parseInt(EachStringInLine));
                         }
+                    } else if (i == 4) {
+                        for (int a = 0; a < EachStringInLine.length(); a++) {
+                            if (!Character.isDigit(EachStringInLine.charAt(a))) {
+                                throw new StudentMarkException("Midterm must be Integer Line :" + (k + 1));
+                            }
+                        }
+                        if (Integer.parseInt(EachStringInLine) > 20 || Integer.parseInt(EachStringInLine) < 0) {
+                            throw new StudentMarkException("Midterm must be in range (0-20) Line :" + (k + 1));
+                        }
+                        studentBuilder.setMidterm(Integer.parseInt(EachStringInLine));
                     }
-                    if (Integer.parseInt(EachStringInLine) > 20 || Integer.parseInt(EachStringInLine) < 0) {
-                        throw new StudentMarkException("Midterm must be in range (0-20) Line :"+(k+1));
-                    }
-                    studentBuilder.setMidterm(Integer.parseInt(EachStringInLine));
+                } else {
+                    throw new SpaceException("Can't contain space in the first Line : " + (k + 1));
                 }
             }
             else{
-                throw new IllegalArgumentException("Can't contain space in the first Line : "+(k+1));
+                if(i==0){
+                    throw new StudentNameException("Can't provide empty Student Name");
+                }
+                else if(i==1){
+                    throw new StudentNumberException("Can't provide empty Student Code");
+                }
+                else{
+                    throw new StudentMarkException("Can't provide empty Student Mark");
+                }
+
             }
         }
         EachStringInLine=EachStringInLine.trim();
+        if(EachStringInLine.isEmpty()){
+            throw new StudentMarkException("Can't provide empty Student Mark");
+        }
         for (int a = 0; a < EachStringInLine.length(); a++) {
             if (!Character.isDigit(EachStringInLine.charAt(a))) {
                 throw new StudentMarkException("Final Exam: must be integer Line: "+(k+1));
