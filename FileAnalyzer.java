@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 public class FileAnalyzer {
-    private static ArrayList<String> words=new ArrayList<>();
+    private static ArrayList<String> words;
     private static Subject subject;
     private static SubjectBuilder subjectBuilder;
     private Student student;
@@ -15,6 +15,7 @@ public class FileAnalyzer {
 
     public static Subject ReadFile(File myfile)throws IllegalArgumentException , RuntimeException{
 
+        words= new ArrayList<>();
         try {
             String fileString=myfile.getName();
             int counterExtension=0;
