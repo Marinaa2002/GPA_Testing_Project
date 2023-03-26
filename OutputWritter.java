@@ -1,3 +1,4 @@
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -23,6 +24,7 @@ public class OutputWritter {
                 int mark = (student.getMidterm() + student.getOral() + student.getActivites() + student.getFinal())*100 / fm;
                 float gpa;
                 String grade;
+                if(mark>100||mark<0)throw new IllegalArgumentException("full mark should be from 0 to 100!");
                 if(mark>=97){
                     gpa = 4f;
                     grade = "A+";
