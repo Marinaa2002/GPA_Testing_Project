@@ -127,11 +127,13 @@ public class FileAnalyzer {
                 count++;
             }
         }
-        if (count != 2) {
-            throw new IllegalArgumentException("Invalid File:Line 1 error");
+        if(count !=s.length()) {
+            if (count != 2) {
+                throw new IllegalArgumentException("Invalid File: Line 1 error");
+            }
         }
-        if(count==s.length()){
-            throw new IllegalArgumentException("Empty record is not allowed");
+        else{
+            throw new SubjectNameException("Empty record is not allowed");
         }
         String EachStringInLine = "";
         int start = 0;
@@ -224,11 +226,13 @@ public class FileAnalyzer {
                 count++;
             }
         }
-        if (count < 5 || count > 5) {
-            throw new IllegalArgumentException("Invalid Line of students : line "+(k+1));
+        if(count!=s.length()) {
+            if (count < 5 || count > 5) {
+                throw new IllegalArgumentException("Invalid Line of students : line " + (k + 1));
+            }
         }
-        if(count==s.length()){
-            throw new IllegalArgumentException("Empty record is not allowed");
+        else{
+            throw new StudentNameException("Empty record is not allowed: Line: "+(k+1));
         }
         String EachStringInLine = "";
         int start = 0;
@@ -295,13 +299,13 @@ public class FileAnalyzer {
             }
             else{
                 if(i==0){
-                    throw new StudentNameException("Can't provide empty Student Name");
+                    throw new StudentNameException("Can't provide empty Student Name Line: "+(k+1));
                 }
                 else if(i==1){
-                    throw new StudentNumberException("Can't provide empty Student Code");
+                    throw new StudentNumberException("Can't provide empty Student Code Line: "+(k+1));
                 }
                 else{
-                    throw new StudentMarkException("Can't provide empty Student Mark");
+                    throw new StudentMarkException("Can't provide empty Student Mark Line: "+(k+1));
                 }
 
             }
