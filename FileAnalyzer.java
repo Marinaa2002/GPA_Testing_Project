@@ -16,6 +16,9 @@ public class FileAnalyzer {
     public static Subject ReadFile(File myfile)throws IllegalArgumentException , RuntimeException{
 
         words= new ArrayList<>();
+        if(myfile.length()==0){
+            throw new IllegalArgumentException("Empty file is not allowed");
+        }
         try {
             String fileString=myfile.getName();
             int counterExtension=0;
@@ -207,17 +210,13 @@ public class FileAnalyzer {
         if(EachStringInLine.isEmpty()){
             throw new FullMarkException("Can't provide empty Subject Mark");
         }
-            String FullMark = "100";
+        int FullMark = 100;
         EachStringInLine=EachStringInLine.trim();
-        if(FullMark.length()!=EachStringInLine.length()){
+        int FullMarkEachStringInLine=Integer.parseInt(EachStringInLine);
+        if(FullMark!=FullMarkEachStringInLine){
             throw new FullMarkException("Full mark must be 100");
         }
-        for (int i = 0; i < EachStringInLine.length(); i++) {
-            if (FullMark.charAt(i) != EachStringInLine.charAt(i)) {
-                throw new FullMarkException("Full mark must be 100");
-            }
-        }
-        subjectBuilder.setFullMark(Integer.parseInt(EachStringInLine));
+        subjectBuilder.setFullMark(FullMarkEachStringInLine);
     }
 
     private static void ValidateStudents(String s,int k) {
