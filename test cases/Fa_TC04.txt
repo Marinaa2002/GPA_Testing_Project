@@ -1,0 +1,6 @@
+Computer Science,cse123s,90
+Sarah Miller Jones,93570128,2,2,17,45
+Natalie Morgan Jackson,82597542,9,7,9,59
+David James Davis,68743169,4,7,1,53
+Nicholas Ethan Garcia,52310684,7,4,9,53
+Emma Madison Rodriguez,30864792,7,4,13,46
