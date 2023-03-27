@@ -212,6 +212,11 @@ public class FileAnalyzer {
         }
         int FullMark = 100;
         EachStringInLine=EachStringInLine.trim();
+        for (int a = 0; a < EachStringInLine.length(); a++) {
+            if (!Character.isDigit(EachStringInLine.charAt(a))) {
+                throw new StudentMarkException("FullMark must be Integer");
+            }
+        }
         int FullMarkEachStringInLine=Integer.parseInt(EachStringInLine);
         if(FullMark!=FullMarkEachStringInLine){
             throw new FullMarkException("Full mark must be 100");
