@@ -127,6 +127,8 @@ public class GUI extends javax.swing.JFrame {
             OutputWritter.WriteFile(s1, file);
         } catch (IOException ex) {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }catch(NullPointerException ex){
+            outputArea.append(ex.toString());
         }
         outputArea.append("File saved successfully!\n");
         outputArea.setForeground(Color.decode("#5EBA7D"));
