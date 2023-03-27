@@ -1,38 +1,39 @@
-import Output.OutputWritter;
-import Output.Student;
-import Output.Subject;
-
 import static org.junit.jupiter.api.Assertions.*;
-import java.io.*;
-import java.util.*;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import org.junit.jupiter.api.Test;
 
-class OutputWritterTest {
-	String a,b,c,actual,save ="";
-	Scanner x;
+import math.OutputWritter;
+import math.Student;
+import math.Subject;
+
+class OutputWritterTest02 {
+
+
 	@Test
-	void test() {
-		String expected = "Error (Sum of Grades must be between 0 and 100)";
-		ArrayList<Student> students = new ArrayList<>();
+	void test() throws IllegalArgumentException{
+	 	ArrayList<Student> students = new ArrayList<>();
 		students.add(new Student("MONA", "1900150",10,10,25,60));
 		Subject s = new Subject("Math","12",100,students);
-		File file = new File("To.txt");
-		try {
-			OutputWritter.WriteFile(s, file);
-		}catch(IOException e) {
-				e.printStackTrace();
-		}
-		try {
-			x = new Scanner(new File("To.txt"));
-			while(x.hasNext()) {
-				a = x.next();
-				b = x.next();
-				actual = a + " " + b + " ";
-				save += actual;
-			}
-			assertEquals(expected, save, "OutputWritter::Test Failed");
-		}catch(FileNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
+        File myfile = new File("TO.txt");
+        
+        try {
+				OutputWritter.WriteFile(s, myfile);
+			}catch(IOException e) {
+					e.printStackTrace();
+			}catch (IllegalArgumentException e) {
+            
+                System.out.println("passed.");
+                return;
+            
+        }
+        fail("program did not throw lllegalArgumentException");
+	
+
+}
 }
