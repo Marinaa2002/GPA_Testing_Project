@@ -12,8 +12,7 @@ class OutputWritterTest {
 	Scanner x;
 	@Test
 	void test() {
-		String expected = "Subject Name: Math Max Mark: 100 "
-				+ "Student name: MONA Student number: 1900150 GPA: 0.0 Grade: F ";
+		String expected = "Error (Sum of Grades must be between 0 and 100)";
 		ArrayList<Student> students = new ArrayList<>();
 		students.add(new Student("MONA", "1900150",-5,0,0,0));
 		Subject s = new Subject("Math","12",100,students);
