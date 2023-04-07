@@ -1,0 +1,26 @@
+Chemistry1245,ABC123s,100
+Ali Raza Khan,55671389,8,9,17,55
+Sarah Ahmed,22355470,5,2,19,49
+Sana Ali,38911516,4,5,11,37
+Zainab Munir,99245470,3,2,7,27
+Iqra Noor,31107888,2,4,13,48
+Fatima Qureshi,90156899,5,5,16,52
+Shoaib Ahmed,21777541,6,3,10,34
+Usman Ali,54320106,7,2,18,51
+Ali Hassan,79101436,1,2,9,30
+Aisha Malik,42560228,3,3,13,41
+Javed Iqbal,87168166,5,1,12,42
+Zubair Ahmed,30017589,4,4,17,56
+Ayesha Asif,12973419,6,5,11,37
+Hassan Ali,83744757,7,2,10,35
+Maria Rehman,54543850,2,3,15,46
+Tariq Aziz,93261783,3,1,16,54
+Nida Ali,56230115,5,3,18,57
+Ahmed Raza,41760344,4,4,11,40
+Sadia Malik,79189028,2,2,7,26
+Saima Ali,17485780,4,5,9,33
+Kashif Ahmed,90123798,5,4,17,58
+Sana Khan,30814166,6,3,13,47
+Salman Ali,49892123,7,4,10,38
+Arslan Akram,61488344,1,3,14,45
+Samra Malik,10382815,3,2,19,53

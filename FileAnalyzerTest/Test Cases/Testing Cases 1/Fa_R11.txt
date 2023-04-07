@@ -1,0 +1,5 @@
+Art History,ABC123s,100
+Mina Ashraf Adel Maged,12345678,007,0008,17,00000000000056
+
+
+//valid student marks but contains zero on the left , should be ignored and works fine 
