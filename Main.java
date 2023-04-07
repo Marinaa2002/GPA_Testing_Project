@@ -9,8 +9,9 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String args[]) {
+        Scanner s = new Scanner(System.in);
         try {
-            Scanner s = new Scanner(System.in);
+            
             System.out.println("insert input file directory:");
             File input = new File(s.nextLine());
             Subject subject = FileAnalyzer.ReadFile(input);
@@ -21,5 +22,6 @@ public class Main {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        s.nextLine();
     }
 }
