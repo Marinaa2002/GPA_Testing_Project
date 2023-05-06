@@ -66,7 +66,7 @@ public class FileAnalyzer {
         return subject;
     }
 
-    private static void validate(ArrayList<String> lines) throws IllegalArgumentException {
+    public static void validate(ArrayList<String> lines) throws IllegalArgumentException {
         ValidateFirstLine(lines.get(0));
         for (int i = 1; i < lines.size(); i++) {
             ValidateStudents(lines.get(i), i);
@@ -74,8 +74,7 @@ public class FileAnalyzer {
         subject = subjectBuilder.build();
     }
 
-    private static boolean checkStringAlphabetic(String input) {
-        String specialChars = "~`!@#$%^&*()-_=+\\|[{]},;:'\"<.>/?";
+    public static boolean checkStringAlphabetic(String input) {
         char currentCharacter;
         boolean upperCasePresent = false;
         boolean lowerCasePresent = false;
@@ -90,16 +89,19 @@ public class FileAnalyzer {
                 numberPresent = false;
             } else if (Character.isLowerCase(currentCharacter)) {
                 lowerCasePresent = true;
-            } else if (specialChars.contains(String.valueOf(currentCharacter))) {
+            } else if (Constants.SPECIAL_CHARS.contains(String.valueOf(currentCharacter))) {
                 specialCharacterPresent = false;
             }
         }
 
-        return numberPresent && (upperCasePresent || lowerCasePresent) && specialCharacterPresent;
+        if (numberPresent && (upperCasePresent || lowerCasePresent) && specialCharacterPresent)
+            return true;
+        else
+            return false;
+
     }
 
-    private static boolean checkStringAlphaNumeric(String input) {
-        String specialChars = "~`!@#$%^&*()-_=+\\|[{]};:'\",<.>/?";
+    public static boolean checkStringAlphaNumeric(String input) {
         char currentCharacter;
         boolean numberPresent = false;
         boolean upperCasePresent = false;
@@ -114,15 +116,19 @@ public class FileAnalyzer {
                 upperCasePresent = true;
             } else if (Character.isLowerCase(currentCharacter)) {
                 lowerCasePresent = true;
-            } else if (specialChars.contains(String.valueOf(currentCharacter))) {
+            } else if (Constants.SPECIAL_CHARS.contains(String.valueOf(currentCharacter))) {
                 specialCharacterPresent = false;
             }
         }
 
-        return numberPresent && (upperCasePresent || lowerCasePresent) && specialCharacterPresent;
+        if (numberPresent && (upperCasePresent || lowerCasePresent) && specialCharacterPresent)
+            return true;
+        else
+            return false;
+
     }
 
-    private static void ValidateFirstLine(String s) throws RuntimeException {
+    public static void ValidateFirstLine(String s) throws RuntimeException {
         int count = 0;
         for (int i = 0; i < s.length(); i++) {
             if (s.charAt(i) == ',') {
@@ -219,7 +225,7 @@ public class FileAnalyzer {
         subjectBuilder.setFullMark(FullMarkEachStringInLine);
     }
 
-    private static void ValidateStudents(String s, int k) {
+    public static void ValidateStudents(String s, int k) {
         int count = 0;
         for (int i = 0; i < s.length(); i++) {
             if (s.charAt(i) == ',') {
