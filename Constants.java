@@ -17,5 +17,5 @@ public class Constants {
     public static final String Student_LINE_Activites_oral_STRING = "Student code :must contain numbers only Line: ";
     public static final String Student_LINE_Mid_STRING = "Midterm must be in range (0-20) Integer Line :";
     public static final String Student_LINE_Final_STRING = "FinalExam must be in range (0-60) Integer Line :";
-
+    public static final String SPECIAL_CHARS = "~`!@#$%^&*()-_=+\\|[{]};:'\",<.>/?";
 }
