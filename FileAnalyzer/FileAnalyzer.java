@@ -1,16 +1,15 @@
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Scanner;
 
 public class FileAnalyzer {
     private static ArrayList<String> words;
     private static Subject subject;
     private static SubjectBuilder subjectBuilder;
-    private Student student;
     private static StudentBuilder studentBuilder;
 
     public static Subject ReadFile(File myfile) throws IllegalArgumentException, RuntimeException {
@@ -39,8 +38,7 @@ public class FileAnalyzer {
             // reading the file, line by line
             String myline;
             while ((myline = bufread.readLine()) != null) {
-                if (!myline.isEmpty())
-                    words.add(myline);
+                words.add(myline);
             }
             bufread.close();
         } catch (IOException e) {
@@ -69,7 +67,9 @@ public class FileAnalyzer {
     public static void validate(ArrayList<String> lines) throws IllegalArgumentException {
         ValidateFirstLine(lines.get(0));
         for (int i = 1; i < lines.size(); i++) {
-            ValidateStudents(lines.get(i), i);
+            if (!lines.get(i).isEmpty()) {
+                ValidateStudents(lines.get(i), i);
+            }
         }
         subject = subjectBuilder.build();
     }
@@ -208,6 +208,7 @@ public class FileAnalyzer {
                 }
             }
         }
+
         if (EachStringInLine.isEmpty()) {
             throw new FullMarkException(Constants.EmptyField_STRING + "Subject Full Mark");
         }
@@ -263,18 +264,19 @@ public class FileAnalyzer {
                                     Constants.Student_LINE_Name_STRING + (k + 1));
                         }
                     } else if (i == 1) {
-                        if (EachStringInLine.length() == 8) {
-                            for (int a = 0; a < EachStringInLine.length(); a++) {
-                                if (!Character.isDigit(EachStringInLine.charAt(a)) && a != 7) {
-                                    throw new StudentNumberException(
-                                            Constants.Student_LINE_Code_STRING + (k + 1));
+                            if (EachStringInLine.length() == 8) {
+                                for (int a = 0; a < EachStringInLine.length(); a++) {
+                                    if (!Character.isDigit(EachStringInLine.charAt(a)) && a != 7||!Character.isDigit(EachStringInLine.charAt(a))&&!Character.isUpperCase(EachStringInLine.charAt(a))&&!Character.isLowerCase(EachStringInLine.charAt(a))) {
+                                        throw new StudentNumberException(
+                                                Constants.Student_LINE_Code_STRING + (k + 1));
+                                    }
                                 }
+                                studentBuilder.setId(EachStringInLine);
+                            } else {
+                                throw new StudentNumberException(Constants.Student_LINE_Code_STRING + (k + 1));
                             }
-                            studentBuilder.setId(EachStringInLine);
-                        } else {
-                            throw new StudentNumberException(Constants.Student_LINE_Code_STRING + (k + 1));
                         }
-                    } else if (i == 2 || i == 3) {
+                     else if (i == 2 || i == 3) {
                         for (int a = 0; a < EachStringInLine.length(); a++) {
                             if (!Character.isDigit(EachStringInLine.charAt(a))) {
                                 throw new StudentMarkException(
@@ -303,7 +305,7 @@ public class FileAnalyzer {
                         studentBuilder.setMidterm(Integer.parseInt(EachStringInLine));
                     }
                 } else {
-                    throw new SpaceException(Constants.SPACE_STRING + (k + 1));
+                    throw new SpaceException(Constants.SPACE_STRING +" Line: "+(k + 1));
                 }
             } else {
                 if (i == 0) {
@@ -318,7 +320,7 @@ public class FileAnalyzer {
         }
         EachStringInLine = EachStringInLine.trim();
         if (EachStringInLine.isEmpty()) {
-            throw new StudentMarkException(Constants.EmptyField_STRING + " Student Mark");
+            throw new StudentMarkException(Constants.EmptyField_STRING + " Student Mark Line: " + (k + 1));
         }
         for (int a = 0; a < EachStringInLine.length(); a++) {
             if (!Character.isDigit(EachStringInLine.charAt(a))) {
@@ -333,7 +335,7 @@ public class FileAnalyzer {
     }
 
     public static void main(String[] args) {
-        File file = new File("D:\\3rd computer\\2nd Term\\Testing\\Projects\\MyProject_v1\\src\\record.txt");
+        File file = new File("D:\\3rd computer\\2nd Term\\Training\\JavaTest\\lib\\LIB\\src\\record.txt");
         Subject S = FileAnalyzer.ReadFile(file);
     }
 }
