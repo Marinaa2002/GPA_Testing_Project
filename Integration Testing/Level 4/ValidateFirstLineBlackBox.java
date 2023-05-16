@@ -18,7 +18,7 @@ class ValidateFirstLineBlack {
 		try{
 			FileAnalyzer.ValidateFirstLine(",Advanced Programming,DEE618s,100");
 		} catch(IllegalArgumentException e) {
-			assertEquals(expected, e.getMessage(), "Error in Test11");
+			assertEquals(expected, e.getMessage(), "Error in Test1");
 		}
 		
 	}
@@ -29,7 +29,7 @@ class ValidateFirstLineBlack {
 		try{
 			FileAnalyzer.ValidateFirstLine("Software_Tes!ting,cse253,100");
 		} catch(SubjectNameException e) {
-			assertEquals(expected, e.getMessage(),"Error in Test12");
+			assertEquals(expected, e.getMessage(),"Error in Test2");
 		}
 		
 	}
@@ -40,7 +40,7 @@ class ValidateFirstLineBlack {
 		try{
 			FileAnalyzer.ValidateFirstLine("15263,cse253,100");
 		} catch(SubjectNameException e) {
-			assertEquals(expected, e.getMessage(),"Error in Test13");
+			assertEquals(expected, e.getMessage(),"Error in Test3");
 		}
 		
 	}
@@ -51,7 +51,7 @@ class ValidateFirstLineBlack {
 		try{
 			FileAnalyzer.ValidateFirstLine(",CSE421,100");
 		} catch(SubjectNameException e) {
-			assertEquals(expected, e.getMessage(),"Error in Test14");
+			assertEquals(expected, e.getMessage(),"Error in Test4");
 		}
 	}
 	
@@ -61,7 +61,7 @@ class ValidateFirstLineBlack {
 		try{
 			FileAnalyzer.ValidateFirstLine("Computer Science,CSE4215,100");
 		} catch(SubjectCodeException e) {
-			assertEquals(expected, e.getMessage(),"Error in Test15");
+			assertEquals(expected, e.getMessage(),"Error in Test5");
 		}
 	}
 
@@ -71,9 +71,38 @@ class ValidateFirstLineBlack {
 		try{
 			FileAnalyzer.ValidateFirstLine("Computer Science,1SC345,100");
 		} catch(SubjectCodeException e) {
-			assertEquals(expected, e.getMessage(),"Error in Test16");
+			assertEquals(expected, e.getMessage(),"Error in Test6");
+		}
+	}
+
+	@Test
+	void test7() {
+		String expected = Constants.Invalid_Record_Subject_STRING;
+		try{
+			FileAnalyzer.ValidateFirstLine("Computer Science,CSE56K,100");
+		} catch(SubjectCodeException e) {
+			assertEquals(expected, e.getMessage(),"Error in Test7");
 		}
 	}
 	
+	@Test
+	void test8() {
+		String expected = Constants.LAST_LETTER_STRING;
+		try{
+			FileAnalyzer.ValidateFirstLine("Computer Science,CSE123K,100");
+		} catch(SubjectCodeException e) {
+			assertEquals(expected, e.getMessage(),"Error in Test8");
+		}
+	}
+	@Test
+	void test9() {
+		String expected = Constants.EmptyField_STRING + "Subject Code";
+		try{
+			FileAnalyzer.ValidateFirstLine("Computer Science,,100");
+		} catch(SubjectCodeException e) {
+			assertEquals(expected, e.getMessage(),"Error in Test9");
+		}
+	}
+
 
 	
