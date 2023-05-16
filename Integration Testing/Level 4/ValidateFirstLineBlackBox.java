@@ -133,6 +133,34 @@ class ValidateFirstLineBlack {
 			assertEquals(expected, e.getMessage(),"Error in Test12");
 		}
 	}
+	@Test
+	void test13() {
+		String expected = Constants.SPACE_STRING;
+		try{
+			FileAnalyzer.ValidateFirstLine("Computer Science,CSE125,100");
+		} catch(SpaceException e) {
+			assertEquals(expected, e.getMessage(),"Error in Test13");
+		}
+	}
 	
+	@Test
+	void test14() {
+		String expected = Constants.SPACE_STRING;
+		try{
+			FileAnalyzer.ValidateFirstLine("Computer Science,CSE125,100");
+		} catch(SpaceException e) {
+			assertEquals(expected, e.getMessage(),"Error in Test14");
+		}
+	}
+	
+	@Test
+	void test15() {
+		String expected = Constants.SPACE_STRING;
+		try{
+			FileAnalyzer.ValidateFirstLine("Computer Science,CSE125s,100");
+		} catch(SpaceException e) {
+			assertEquals(expected, e.getMessage(),"Error in Test15");
+		}
+	}
 
 	
