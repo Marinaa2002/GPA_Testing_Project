@@ -104,5 +104,35 @@ class ValidateFirstLineBlack {
 		}
 	}
 
+	@Test
+	void test10() {
+		String expected = Constants.Invalid_Record_Subject_STRING;
+		try{
+			FileAnalyzer.ValidateFirstLine("Computer Science,S!f123,100");
+		} catch(SubjectCodeException e) {
+			assertEquals(expected, e.getMessage(),"Error in Test10");
+		}
+	}
+
+	@Test
+	void test11() {
+		String expected = Constants.Invalid_Record_Subject_STRING;
+		try{
+			FileAnalyzer.ValidateFirstLine("Computer Science,SE34,100");
+		} catch(SubjectCodeException e) {
+			assertEquals(expected, e.getMessage(),"Error in Test11");
+		}
+	}
+
+	@Test
+	void test12() {
+		String expected = Constants.Invalid_Record_Subject_STRING;
+		try{
+			FileAnalyzer.ValidateFirstLine("Computer Science,CSE123R4,100");
+		} catch(SubjectCodeException e) {
+			assertEquals(expected, e.getMessage(),"Error in Test12");
+		}
+	}
+	
 
 	
