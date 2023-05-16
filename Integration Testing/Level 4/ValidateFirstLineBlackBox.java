@@ -11,8 +11,8 @@ import math.SpaceException;
 import math.SubjectCodeException;
 import math.SubjectNameException;
 
-class ValidateFirstLineWhite {
-@Test
+class ValidateFirstLineBlack {
+	@Test
 	void test1() {
 		String expected = Constants.INVALIDLINE1_STRING;
 		try{
@@ -44,4 +44,36 @@ class ValidateFirstLineWhite {
 		}
 		
 	}
+	
+	@Test
+	void test4() {
+		String expected = Constants.EmptyField_STRING + "Subject Name";
+		try{
+			FileAnalyzer.ValidateFirstLine(",CSE421,100");
+		} catch(SubjectNameException e) {
+			assertEquals(expected, e.getMessage(),"Error in Test14");
+		}
+	}
+	
+	@Test
+	void test5() {
+		String expected = Constants.LAST_LETTER_STRING;
+		try{
+			FileAnalyzer.ValidateFirstLine("Computer Science,CSE4215,100");
+		} catch(SubjectCodeException e) {
+			assertEquals(expected, e.getMessage(),"Error in Test15");
+		}
+	}
+
+	@Test
+	void test6() {
+		String expected = Constants.Invalid_Record_Subject_STRING;
+		try{
+			FileAnalyzer.ValidateFirstLine("Computer Science,1SC345,100");
+		} catch(SubjectCodeException e) {
+			assertEquals(expected, e.getMessage(),"Error in Test16");
+		}
+	}
+	
+
 	
