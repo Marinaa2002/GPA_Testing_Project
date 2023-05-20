@@ -378,7 +378,7 @@ class OutputWriterWhite {
 		}
 	}
 	@Test
-	void test14() { //66,99
+	void test14() { 
 		String a, b , save, actual = "";
 	    Scanner x;
 		String expected = "Subject Name: Math Max Mark: 100 "
