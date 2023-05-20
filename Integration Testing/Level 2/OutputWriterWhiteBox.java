@@ -377,7 +377,39 @@ class OutputWriterWhite {
 			e.printStackTrace();
 		}
 	}
-	
+	@Test
+	void test14() { //66,99
+		String a, b , save, actual = "";
+	    Scanner x;
+		String expected = "Subject Name: Math Max Mark: 100 "
+				+ "Student name: MONA Student number: 1900150 GPA: 1.3 Grade: D+ "
+				+ "Student name: MONA Student number: 1900150 GPA: 4.0 Grade: A+ ";
+		ArrayList<Student> students = new ArrayList<>();
+		students.add(new Student("MONA", "1900150", 10, 10, 15, 31));
+        students.add(new Student("MONA", "1900150", 10, 10, 20, 59));
+        Subject s = new Subject("Math", "12", 100, students);
+        File file = new File("T0.txt");
+        try {
+			OutputWritter.WriteFile(s, file);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+        
+		try {
+			x = new Scanner(new File("T0.txt"));
+			while(x.hasNext()) {
+				 a = x.next();
+				 b = x.next();
+				 save = a + " " +b + " " ;
+				 actual += save;
+			}
+			assertEquals(expected, actual, "OutputWritter::Test14 failed");
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+	}
     @Test
     public void test15() {
     	ArrayList<Student> students = new ArrayList<>();
