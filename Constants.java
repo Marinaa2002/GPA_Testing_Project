@@ -18,4 +18,9 @@ public class Constants {
     public static final String Student_LINE_Mid_STRING = "Midterm must be in range (0-20) Integer Line :";
     public static final String Student_LINE_Final_STRING = "FinalExam must be in range (0-60) Integer Line :";
     public static final String SPECIAL_CHARS = "~`!@#$%^&*()-_=+\\|[{]};:'\",<.>/?";
+    public static final String INPUT_MASSAGE = "insert input file directory:";
+    public static final String OUTPUT_MASSAGE = "insert output directory:";
+    public static final String RESTART_MASSAGE = "To continue enter Y program will terminate otherwise:";
+    public static final String SUCCESS_MASSAGE = "Output written successfully.";
+    public static final String EXIT_MASSAGE = "Press Enter to exit..";
 }
