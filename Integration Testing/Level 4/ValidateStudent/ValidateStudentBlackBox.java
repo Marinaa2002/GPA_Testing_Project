@@ -57,7 +57,7 @@ public class ValidateStudentBlackBox {
             FileAnalyzer.ValidateStudents(input, 0);
 
         } catch (SpaceException e) {
-            assertEquals(Constants.SPACE_STRING + (0 + 1), e.getMessage());
+            assertEquals(Constants.SPACE_STRING + " Line: "+ (0 + 1), e.getMessage());
         }
     }
 
@@ -98,7 +98,7 @@ public void TestCase1StudentNumber() {
             FileAnalyzer.ValidateStudents(input, 0);
 
         } catch (SpaceException e) {
-            assertEquals(Constants.SPACE_STRING + (0 + 1), e.getMessage());
+            assertEquals(Constants.SPACE_STRING + " Line: "+(0 + 1), e.getMessage());
         }
 
     }
@@ -167,7 +167,7 @@ public void TestCase1StudentNumber() {
              FileAnalyzer.ValidateStudents(input, 0);
 
          } catch (SpaceException e) {
-             assertEquals(Constants.SPACE_STRING + (0 + 1), e.getMessage());
+             assertEquals(Constants.SPACE_STRING + " Line: "+(0 + 1), e.getMessage());
          }
 
      }
@@ -178,7 +178,7 @@ public void TestCase1StudentNumber() {
              FileAnalyzer.ValidateStudents(input, 0);
 
          } catch (SpaceException e) {
-             assertEquals(Constants.SPACE_STRING + (0 + 1), e.getMessage());
+             assertEquals(Constants.SPACE_STRING + " Line: "+(0 + 1), e.getMessage());
          }
 
      }
@@ -268,7 +268,7 @@ public void TestCase1StudentNumber() {
             FileAnalyzer.ValidateStudents(input, 0);
 
         } catch (SpaceException e) {
-            assertEquals(Constants.SPACE_STRING + (0 + 1), e.getMessage());
+            assertEquals(Constants.SPACE_STRING + " Line: "+(0 + 1), e.getMessage());
         }
 
     }
@@ -306,6 +306,17 @@ public void TestCase1StudentNumber() {
         }
 
     }
+      @Test
+    public void TestCase6Midterm() {
+        input = "Daniel William,87654128,5,3,$2,52";
+        try {
+            FileAnalyzer.ValidateStudents(input, 0);
+
+        } catch (StudentMarkException e) {
+            assertEquals(Constants.Student_LINE_Mid_STRING + (0 + 1), e.getMessage());
+        }
+
+    }
 
     @Test
     public void TestCase1FinalMark() {
@@ -326,7 +337,7 @@ public void TestCase1StudentNumber() {
             FileAnalyzer.ValidateStudents(input, 0);
 
         } catch (SpaceException e) {
-            assertEquals(Constants.SPACE_STRING + (0 + 1), e.getMessage());
+            assertEquals(Constants.SPACE_STRING + " Line: "+ (0 + 1), e.getMessage());
         }
 
     }
@@ -364,5 +375,15 @@ public void TestCase1StudentNumber() {
         }
 
     }
+      @Test
+      public void TestCase6FinalMark() {
+          input = "Daniel William,87654128,5,3,$2,52";
+          try {
+              FileAnalyzer.ValidateStudents(input, 0);
+
+          } catch (StudentMarkException e) {
+              assertEquals(Constants.Student_LINE_Mid_STRING + (0 + 1), e.getMessage());
+          }
+      }
 
 }
