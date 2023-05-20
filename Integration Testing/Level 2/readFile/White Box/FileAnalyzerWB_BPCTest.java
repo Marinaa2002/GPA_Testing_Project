@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
- */
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -32,7 +28,7 @@ public class FileAnalyzerWB_BPCTest {
              assertEquals(Constants.EM_STRING, e.getMessage(),"error in test case 1");
              return;
          }
-         fail("program did not throw SpaceException ");
+         fail("program did not throw Exception ");
  
      }
       @Test
@@ -44,19 +40,19 @@ public class FileAnalyzerWB_BPCTest {
              assertEquals(Constants.invalidfile, e.getMessage(),"error in test case 2");
              return;
          }
-         fail("program did not throw SpaceException ");
+         fail("program did not throw Exception ");
  
      }
       @Test
      public void testReadFileWB_BPC3() throws FileNotFoundException ,RuntimeException, IllegalArgumentException, IOException{
-         File myfile = new File("test cases/FA_WB_BPC_3.txtaa");
+         File myfile = new File("test cases/FA_WB_BPC_3.aatxt");
          try {
              Subject result = FileAnalyzer.ReadFile(myfile);
          } catch (IllegalArgumentException e) {
              assertEquals(Constants.invalidfile, e.getMessage(),"error in test case 3");
              return;
          }
-         fail("program did not throw SpaceException ");
+         fail("program did not throw Exception ");
  
      }
       @Test
@@ -68,7 +64,7 @@ public class FileAnalyzerWB_BPCTest {
              assertEquals(Constants.EM_STRING, e.getMessage(),"error in test case 4");
              return;
          }
-         fail("program did not throw SpaceException ");
+         fail("program did not throw Exception ");
  
      }
       @Test
@@ -80,7 +76,7 @@ public class FileAnalyzerWB_BPCTest {
              
              return;
          }
-         fail("program did not throw SpaceException ");
+         fail("program did not throw Exception ");
  
      }
       @Test
@@ -92,7 +88,7 @@ public class FileAnalyzerWB_BPCTest {
              assertEquals(Constants.FULL_MARK_EXCEPTION_MSG, e.getMessage(),"error in test case 6");
              return;
          }
-         fail("program did not throw SpaceException ");
+         fail("program did not throw Exception ");
  
      }
       @Test
@@ -104,7 +100,7 @@ public class FileAnalyzerWB_BPCTest {
              assertEquals(Constants.invalidfile, e.getMessage(),"error in test case 7");
              return;
          }
-         fail("program did not throw SpaceException ");
+         fail("program did not throw Exception ");
  
      }
       @Test
@@ -116,7 +112,7 @@ public class FileAnalyzerWB_BPCTest {
              assertEquals(Constants.INVALIDLINE1_STRING, e.getMessage(),"error in test case 8");
              return;
          }
-         fail("program did not throw SpaceException ");
+         fail("program did not throw Exception ");
  
      }
      @Test
