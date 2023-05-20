@@ -36,7 +36,7 @@ public class SettersTestWB {
         SubjectBuilder subjectBuilder = new SubjectBuilder();
         subjectBuilder.setFullMark(100);
         Subject subject = subjectBuilder.build();
-        assertEquals(10, subject.getFullMark(),"subject full mark is incorrect");
+        assertEquals(100, subject.getFullMark(),"subject full mark is incorrect");
     }
 
     @Test
