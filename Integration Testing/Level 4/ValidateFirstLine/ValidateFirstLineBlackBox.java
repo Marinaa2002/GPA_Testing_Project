@@ -267,4 +267,34 @@ class ValidateFirstLineBlack {
 			assertEquals(expected, e.getMessage(),"Error in Test26");
 		}
 	}
+	
+	@Test
+	void test27() {
+		String expected = Constants.FULL_MARK_EXCEPTION_MSG;
+		try{
+			FileAnalyzer.ValidateFirstLine("Advanced Algorithms,DDE318s,A00");
+		} catch(FullMarkException e) {
+			assertEquals(expected, e.getMessage(),"Error in Test27");
+		}
+	}
+	
+	@Test
+	void test28() {
+		String expected = Constants.FULL_MARK_EXCEPTION_MSG;
+		try{
+			FileAnalyzer.ValidateFirstLine("Advanced Algorithms,DDE318s,1A0");
+		} catch(FullMarkException e) {
+			assertEquals(expected, e.getMessage(),"Error in Test28");
+		}
+	}
+	
+	@Test
+	void test29() {
+		String expected = Constants.FULL_MARK_EXCEPTION_MSG;
+		try{
+			FileAnalyzer.ValidateFirstLine("Advanced Algorithms,DDE318s,10A");
+		} catch(FullMarkException e) {
+			assertEquals(expected, e.getMessage(),"Error in Test29");
+		}
+	}
 }
