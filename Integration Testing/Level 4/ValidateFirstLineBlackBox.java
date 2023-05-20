@@ -135,11 +135,10 @@ class ValidateFirstLineBlack {
 	}
 	@Test
 	void test13() {
-		String expected = Constants.SPACE_STRING;
 		try{
 			FileAnalyzer.ValidateFirstLine("Computer Science,CSE125,100");
-		} catch(SpaceException e) {
-			assertEquals(expected, e.getMessage(),"Error in Test13");
+		} catch(Exception e) {
+			fail("Fail in Test Case1 Data");
 		}
 	}
 	
