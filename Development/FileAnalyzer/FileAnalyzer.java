@@ -9,16 +9,16 @@ import java.util.Iterator;
 public class FileAnalyzer {
     private static ArrayList<String> words;
     private static Subject subject;
-    private static SubjectBuilder subjectBuilder;
+    private static SubjectBuilder subjectBuilder=new SubjectBuilder();
     private static StudentBuilder studentBuilder;
 
-    public static Subject ReadFile(File myfile) throws IllegalArgumentException, RuntimeException {
+    public static Subject ReadFile(File myfile) throws IllegalArgumentException, RuntimeException, IOException {
 
         words = new ArrayList<>();
         if (myfile.length() == 0) {
             throw new IllegalArgumentException(Constants.EM_STRING);
         }
-        try {
+      
             String fileString = myfile.getName();
             int counterExtension = 0;
             String extension = "";
@@ -41,9 +41,6 @@ public class FileAnalyzer {
                 words.add(myline);
             }
             bufread.close();
-        } catch (IOException e) {
-            System.out.println("Exception: " + e);
-        }
         // To validate Validate
         validate(words);
         ArrayList<Student> students = new ArrayList<>();
@@ -334,7 +331,7 @@ public class FileAnalyzer {
         subjectBuilder.addStudent(studentBuilder.build());
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IllegalArgumentException, RuntimeException, IOException {
         File file = new File("D:\\3rd computer\\2nd Term\\Training\\JavaTest\\lib\\LIB\\src\\record.txt");
         Subject S = FileAnalyzer.ReadFile(file);
     }
