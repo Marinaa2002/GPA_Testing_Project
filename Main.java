@@ -13,24 +13,24 @@ public class Main {
         Scanner s = new Scanner(System.in);
         while (true) {
             try {
-                System.out.println("insert input file directory:");
+                System.out.println(Constants.INPUT_MASSAGE);
                 File input = new File(s.nextLine());
                 Subject subject = FileAnalyzer.ReadFile(input);
-                System.out.println("insert output directory:");
+                System.out.println(Constants.OUTPUT_MASSAGE);
                 File output = new File(s.nextLine());
                 OutputWritter.WriteFile(subject, output);
-                System.out.println("done.");
+                System.out.println(Constants.SUCCESS_MASSAGE);
 
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-            System.out.println("To continue enter Y program will terminate otherwise:");
+            System.out.println(Constants.RESTART_MASSAGE);
             String cont = s.nextLine();
             if(!cont.equalsIgnoreCase("y")){
                 break;
             }
         }
-        System.out.println("Press Enter to exit..");
+        System.out.println(Constants.EXIT_MASSAGE);
         System.in.read();
     }
 
