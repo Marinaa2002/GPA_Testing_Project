@@ -138,7 +138,7 @@ class ValidateFirstLineBlack {
 		try{
 			FileAnalyzer.ValidateFirstLine("Computer Science,CSE125,100");
 		} catch(Exception e) {
-			fail("Fail in Test Case1 Data");
+			fail("Fail in Test Case13 Data");
 		}
 	}
 	
@@ -147,7 +147,7 @@ class ValidateFirstLineBlack {
 		try{
 			FileAnalyzer.ValidateFirstLine("Computer Science,CSE125s,100");
 		} catch(SpaceException e) {
-			fail("Fail in Test Case1 Data");
+			fail("Fail in Test Case14 Data");
 		}
 	}
 	
@@ -156,7 +156,7 @@ class ValidateFirstLineBlack {
 		try{
 			FileAnalyzer.ValidateFirstLine("Software Testing,CSE125,100");
 		} catch(SpaceException e) {
-			fail("Fail in Test Case1 Data");
+			fail("Fail in Test Case15 Data");
 		}
 	}
 
